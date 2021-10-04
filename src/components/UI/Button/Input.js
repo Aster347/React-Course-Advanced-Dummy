@@ -1,11 +1,11 @@
-import { useRef, useImperativeHandle } from "react";
-import styles from "./input.module.css";
+import React, { useRef, useImperativeHandle } from 'react';
+import styles from "./Input.module.css";
 
 const Input = React.forwardRef((props, ref) => {
   const inputRef = useRef();
 
   const activate = () => {
-    inputRef = useRef();
+    inputRef.current.focus();
   };
 
   useImperativeHandle(ref, () => {
@@ -21,12 +21,12 @@ const Input = React.forwardRef((props, ref) => {
         props.isValid === false ? styles.invalid : ""
       }`}
     >
-      <label htmlFor="email">{props.label}</label>
+      <label htmlFor={props.id}>{props.label}</label>
       <input
         ref={inputRef}
         type={props.type}
         id={props.id}
-        value={emailState.value}
+        value={props.value}
         onChange={props.onChange}
         onBlur={props.onBlur}
       />
